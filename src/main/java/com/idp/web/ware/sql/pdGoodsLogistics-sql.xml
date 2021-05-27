@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.idp.web.ware.dao.PdGoodsLogisticsDao">
+
+	<parameterMap id="parameterMap" type="com.idp.web.ware.entity.PdGoodsLogistics"></parameterMap>
+	<resultMap id="resultMap" type="com.idp.web.ware.entity.PdGoodsLogistics">
+		<result property="id" column="id"/>
+		<result property="userId" column="user_id"/>
+		<result property="level" column="level"/>
+		<result property="otherMsg" column="other_msg"/>
+		<result property="goodsId" column="goods_id"/>
+		<result property="createDate" column="create_date"/>
+	</resultMap>
+	
+	<sql id="columnSql">
+		<trim suffixOverrides=",">
+			t.id,
+			t.user_id,
+			t.level,
+			t.other_msg,
+			t.goods_id,
+			t.create_date,
+	 	</trim>
+	</sql>
+	
+	<select id="find" parameterMap="parameterMap" resultMap="resultMap">
+		select
+			<include refid="columnSql"></include>
+		from pd_goods_logistics t
+		<where>
+		</where>
+	</select>
+	
+	<select id="getById" parameterType="java.lang.String" resultMap="resultMap">
+		select
+			<include refid="columnSql"></include>
+		from pd_goods_logistics t
+		where t.id = #{value}
+	</select>
+	
+	<insert id="add" parameterMap="parameterMap">
+		insert into pd_goods_logistics
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			id,
+			user_id,
+			level,
+			other_msg,
+			goods_id,
+			create_date,
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			#{id},
+			#{userId},
+			#{level},
+			#{otherMsg},
+			#{goodsId},
+			#{createDate},
+		</trim>
+	</insert>
+	
+	<insert id="batchAdd" parameterType="java.util.List">
+		insert into pd_goods_logistics
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			id,
+			user_id,
+			level,
+			other_msg,
+			goods_id,
+			create_date,
+		</trim>
+		values
+		<foreach collection="list" item="item" separator=",">
+			<trim prefix="(" suffix=")" suffixOverrides=",">
+				#{item.id},
+				#{item.userId},
+				#{item.level},
+				#{item.otherMsg},
+				#{item.goodsId},
+				#{item.createDate},
+			</trim>
+		</foreach>
+	</insert>
+	
+	<update id="update" parameterMap="parameterMap">
+		update pd_goods_logistics
+		<set>
+			user_id = #{userId},
+			level = #{level},
+			other_msg = #{otherMsg},
+			goods_id = #{goodsId},
+			create_date = #{createDate},
+		</set>
+		where id = #{id}
+	</update>
+	
+	<update id="updateNotNull" parameterMap="parameterMap">
+		update pd_goods_logistics
+		<set>
+			<if test="userId != null">
+			user_id = #{userId},
+			</if>
+			<if test="level != null">
+			level = #{level},
+			</if>
+			<if test="otherMsg != null">
+			other_msg = #{otherMsg},
+			</if>
+			<if test="goodsId != null">
+			goods_id = #{goodsId},
+			</if>
+			<if test="createDate != null">
+			create_date = #{createDate},
+			</if>
+		</set>
+		where id = #{id}
+	</update>
+	
+	<delete id="delete" parameterType="java.lang.String">
+		delete from pd_goods_logistics where id = #{value}
+	</delete>
+	
+	<delete id="batchDelete" parameterType="java.util.List">
+		delete from pd_goods_logistics where id in
+		<foreach collection="list" item="item" open="(" close=")" separator=",">
+			#{item}
+		</foreach>
+	</delete>
+	
+</mapper>

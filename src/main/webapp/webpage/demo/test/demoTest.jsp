@@ -26,7 +26,7 @@
 	        <div class="input-icon right">
 	        	<i class="fa"></i>
 	          <div class="input-group date date-picker" data-date-format="yyyy-mm-dd">
-							<input type="text" class="form-control" name="birthday" readonly 
+							<input type="text" class="form-control" name="birthday" readonly
 								value="<fmt:formatDate value="${demoTest.birthday}" pattern="yyyy-MM-dd"/>"  maxlength="11"/>
 							<span class="input-group-btn">
 							<button class="btn default" type="button"><i class="fa fa-calendar"></i></button>

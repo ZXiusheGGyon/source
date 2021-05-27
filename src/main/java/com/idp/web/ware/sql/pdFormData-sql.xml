@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.idp.web.ware.dao.PdFormDataDao">
+
+	<parameterMap id="parameterMap" type="com.idp.web.ware.entity.PdFormData"></parameterMap>
+	<resultMap id="resultMap" type="com.idp.web.ware.entity.PdFormData">
+		<result property="id" column="id"/>
+		<result property="goodsData" column="goods_data"/>
+		<result property="templateAttributesId" column="template_attributes_id"/>
+		<result property="goodsId" column="goods_id"/>
+	</resultMap>
+	
+	<sql id="columnSql">
+		<trim suffixOverrides=",">
+			t.id,
+			t.goods_data,
+			t.template_attributes_id,
+			t.goods_id,
+	 	</trim>
+	</sql>
+	
+	<select id="find" parameterMap="parameterMap" resultMap="resultMap">
+		select
+			<include refid="columnSql"></include>
+		from pd_form_data t
+		<where>
+		</where>
+	</select>
+	
+	<select id="getById" parameterType="java.lang.String" resultMap="resultMap">
+		select
+			<include refid="columnSql"></include>
+		from pd_form_data t
+		where t.id = #{value}
+	</select>
+	
+	<insert id="add" parameterMap="parameterMap">
+		insert into pd_form_data
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			id,
+			goods_data,
+			template_attributes_id,
+			goods_id,
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			#{id},
+			#{goodsData},
+			#{templateAttributesId},
+			#{goodsId},
+		</trim>
+	</insert>
+	
+	<insert id="batchAdd" parameterType="java.util.List">
+		insert into pd_form_data
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			id,
+			goods_data,
+			template_attributes_id,
+			goods_id,
+		</trim>
+		values
+		<foreach collection="list" item="item" separator=",">
+			<trim prefix="(" suffix=")" suffixOverrides=",">
+				#{item.id},
+				#{item.goodsData},
+				#{item.templateAttributesId},
+				#{item.goodsId},
+			</trim>
+		</foreach>
+	</insert>
+	
+	<update id="update" parameterMap="parameterMap">
+		update pd_form_data
+		<set>
+			goods_data = #{goodsData},
+			template_attributes_id = #{templateAttributesId},
+			goods_id = #{goodsId},
+		</set>
+		where id = #{id}
+	</update>
+	
+	<update id="updateNotNull" parameterMap="parameterMap">
+		update pd_form_data
+		<set>
+			<if test="goodsData != null">
+			goods_data = #{goodsData},
+			</if>
+			<if test="templateAttributesId != null">
+			template_attributes_id = #{templateAttributesId},
+			</if>
+			<if test="goodsId != null">
+			goods_id = #{goodsId},
+			</if>
+		</set>
+		where id = #{id}
+	</update>
+	
+	<delete id="delete" parameterType="java.lang.String">
+		delete from pd_form_data where id = #{value}
+	</delete>
+	
+	<delete id="batchDelete" parameterType="java.util.List">
+		delete from pd_form_data where id in
+		<foreach collection="list" item="item" open="(" close=")" separator=",">
+			#{item}
+		</foreach>
+	</delete>
+	
+</mapper>

@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.idp.web.ware.dao.PdFormTemplateDao">
+
+	<parameterMap id="parameterMap" type="com.idp.web.ware.entity.PdFormTemplate"></parameterMap>
+	<resultMap id="resultMap" type="com.idp.web.ware.entity.PdFormTemplate">
+		<result property="id" column="id"/>
+		<result property="userId" column="user_id"/>
+		<result property="templateName" column="template_name"/>
+		<result property="remark" column="remark"/>
+		<result property="createDate" column="create_date"/>
+	</resultMap>
+	
+	<sql id="columnSql">
+		<trim suffixOverrides=",">
+			t.id,
+			t.user_id,
+			t.template_name,
+			t.remark,
+			t.create_date,
+	 	</trim>
+	</sql>
+	
+	<select id="find" parameterMap="parameterMap" resultMap="resultMap">
+		select
+			<include refid="columnSql"></include>
+		from pd_form_template t
+		<where>
+		</where>
+	</select>
+	
+	<select id="getById" parameterType="java.lang.String" resultMap="resultMap">
+		select
+			<include refid="columnSql"></include>
+		from pd_form_template t
+		where t.id = #{value}
+	</select>
+	
+	<insert id="add" parameterMap="parameterMap">
+		insert into pd_form_template
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			id,
+			user_id,
+			template_name,
+			remark,
+			create_date,
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			#{id},
+			#{userId},
+			#{templateName},
+			#{remark},
+			#{createDate},
+		</trim>
+	</insert>
+	
+	<insert id="batchAdd" parameterType="java.util.List">
+		insert into pd_form_template
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			id,
+			user_id,
+			template_name,
+			remark,
+			create_date,
+		</trim>
+		values
+		<foreach collection="list" item="item" separator=",">
+			<trim prefix="(" suffix=")" suffixOverrides=",">
+				#{item.id},
+				#{item.userId},
+				#{item.templateName},
+				#{item.remark},
+				#{item.createDate},
+			</trim>
+		</foreach>
+	</insert>
+	
+	<update id="update" parameterMap="parameterMap">
+		update pd_form_template
+		<set>
+			user_id = #{userId},
+			template_name = #{templateName},
+			remark = #{remark},
+			create_date = #{createDate},
+		</set>
+		where id = #{id}
+	</update>
+	
+	<update id="updateNotNull" parameterMap="parameterMap">
+		update pd_form_template
+		<set>
+			<if test="userId != null">
+			user_id = #{userId},
+			</if>
+			<if test="templateName != null">
+			template_name = #{templateName},
+			</if>
+			<if test="remark != null">
+			remark = #{remark},
+			</if>
+			<if test="createDate != null">
+			create_date = #{createDate},
+			</if>
+		</set>
+		where id = #{id}
+	</update>
+	
+	<delete id="delete" parameterType="java.lang.String">
+		delete from pd_form_template where id = #{value}
+	</delete>
+	
+	<delete id="batchDelete" parameterType="java.util.List">
+		delete from pd_form_template where id in
+		<foreach collection="list" item="item" open="(" close=")" separator=",">
+			#{item}
+		</foreach>
+	</delete>
+	
+</mapper>

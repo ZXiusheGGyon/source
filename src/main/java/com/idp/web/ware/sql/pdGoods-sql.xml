@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.idp.web.ware.dao.PdGoodsDao">
+
+	<parameterMap id="parameterMap" type="com.idp.web.ware.entity.PdGoods"></parameterMap>
+	<resultMap id="resultMap" type="com.idp.web.ware.entity.PdGoods">
+		<result property="goodsId" column="goods_id"/>
+		<result property="goodsName" column="goods_name"/>
+		<result property="userId" column="user_id"/>
+		<result property="createDate" column="create_date"/>
+	</resultMap>
+	
+	<sql id="columnSql">
+		<trim suffixOverrides=",">
+			t.goods_id,
+			t.goods_name,
+			t.user_id,
+			t.create_date,
+	 	</trim>
+	</sql>
+	
+	<select id="find" parameterMap="parameterMap" resultMap="resultMap">
+		select
+			<include refid="columnSql"></include>
+		from pd_goods t
+		<where>
+			<if test="goodsName != null and goodsName != ''">
+				and t.goods_name like concat('%',#{goodsName},'%')
+			</if>
+		</where>
+	</select>
+	
+	<select id="getById" parameterType="java.lang.String" resultMap="resultMap">
+		select
+			<include refid="columnSql"></include>
+		from pd_goods t
+		where t.goods_id = #{value}
+	</select>
+	
+	<insert id="add" parameterMap="parameterMap">
+		insert into pd_goods
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			goods_id,
+			goods_name,
+			user_id,
+			create_date,
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			#{goodsId},
+			#{goodsName},
+			#{userId},
+			#{createDate},
+		</trim>
+	</insert>
+	
+	<insert id="batchAdd" parameterType="java.util.List">
+		insert into pd_goods
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			goods_id,
+			goods_name,
+			user_id,
+			create_date,
+		</trim>
+		values
+		<foreach collection="list" item="item" separator=",">
+			<trim prefix="(" suffix=")" suffixOverrides=",">
+				#{item.goodsId},
+				#{item.goodsName},
+				#{item.userId},
+				#{item.createDate},
+			</trim>
+		</foreach>
+	</insert>
+	
+	<update id="update" parameterMap="parameterMap">
+		update pd_goods
+		<set>
+			goods_name = #{goodsName},
+			user_id = #{userId},
+			create_date = #{createDate},
+		</set>
+		where goods_id = #{goodsId}
+	</update>
+	
+	<update id="updateNotNull" parameterMap="parameterMap">
+		update pd_goods
+		<set>
+			<if test="goodsName != null">
+			goods_name = #{goodsName},
+			</if>
+			<if test="userId != null">
+			user_id = #{userId},
+			</if>
+			<if test="createDate != null">
+			create_date = #{createDate},
+			</if>
+		</set>
+		where goods_id = #{goodsId}
+	</update>
+	
+	<delete id="delete" parameterType="java.lang.String">
+		delete from pd_goods where goods_id = #{value}
+	</delete>
+	
+	<delete id="batchDelete" parameterType="java.util.List">
+		delete from pd_goods where goods_id in
+		<foreach collection="list" item="item" open="(" close=")" separator=",">
+			#{item}
+		</foreach>
+	</delete>
+	
+</mapper>

@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.idp.web.ware.dao.PdFormTemplateAttributesDao">
+
+	<parameterMap id="parameterMap" type="com.idp.web.ware.entity.PdFormTemplateAttributes"></parameterMap>
+	<resultMap id="resultMap" type="com.idp.web.ware.entity.PdFormTemplateAttributes">
+		<result property="id" column="id"/>
+		<result property="templateId" column="template_id"/>
+		<result property="attributesName" column="attributes_name"/>
+		<result property="elementAttribute" column="element_attribute"/>
+		<result property="elementType" column="element_type"/>
+		<result property="elementOrder" column="element_order"/>
+		<result property="describe" column="describe"/>
+		<result property="isNull" column="is_null"/>
+		<result property="elementOption" column="element_option"/>
+		<result property="elementFormat" column="element_format"/>
+		<result property="isShow" column="is_show"/>
+	</resultMap>
+	
+	<sql id="columnSql">
+		<trim suffixOverrides=",">
+			t.id,
+			t.template_id,
+			t.attributes_name,
+			t.element_attribute,
+			t.element_type,
+			t.element_order,
+			t.describe,
+			t.is_null,
+			t.element_option,
+			t.element_format,
+			t.is_show,
+	 	</trim>
+	</sql>
+	
+	<select id="find" parameterMap="parameterMap" resultMap="resultMap">
+		select
+			<include refid="columnSql"></include>
+		from pd_form_template_attributes t
+		<where>
+			<if test="attributesName != null and attributesName != ''">
+				and t.attributes_name like concat('%',#{attributesName},'%')
+			</if>
+		</where>
+	</select>
+	
+	<select id="getById" parameterType="java.lang.String" resultMap="resultMap">
+		select
+			<include refid="columnSql"></include>
+		from pd_form_template_attributes t
+		where t.id = #{value}
+	</select>
+	
+	<insert id="add" parameterMap="parameterMap">
+		insert into pd_form_template_attributes
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			id,
+			template_id,
+			attributes_name,
+			element_attribute,
+			element_type,
+			element_order,
+			describe,
+			is_null,
+			element_option,
+			element_format,
+			is_show,
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			#{id},
+			#{templateId},
+			#{attributesName},
+			#{elementAttribute},
+			#{elementType},
+			#{elementOrder},
+			#{describe},
+			#{isNull},
+			#{elementOption},
+			#{elementFormat},
+			#{isShow},
+		</trim>
+	</insert>
+	
+	<insert id="batchAdd" parameterType="java.util.List">
+		insert into pd_form_template_attributes
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			id,
+			template_id,
+			attributes_name,
+			element_attribute,
+			element_type,
+			element_order,
+			describe,
+			is_null,
+			element_option,
+			element_format,
+			is_show,
+		</trim>
+		values
+		<foreach collection="list" item="item" separator=",">
+			<trim prefix="(" suffix=")" suffixOverrides=",">
+				#{item.id},
+				#{item.templateId},
+				#{item.attributesName},
+				#{item.elementAttribute},
+				#{item.elementType},
+				#{item.elementOrder},
+				#{item.describe},
+				#{item.isNull},
+				#{item.elementOption},
+				#{item.elementFormat},
+				#{item.isShow},
+			</trim>
+		</foreach>
+	</insert>
+	
+	<update id="update" parameterMap="parameterMap">
+		update pd_form_template_attributes
+		<set>
+			template_id = #{templateId},
+			attributes_name = #{attributesName},
+			element_attribute = #{elementAttribute},
+			element_type = #{elementType},
+			element_order = #{elementOrder},
+			describe = #{describe},
+			is_null = #{isNull},
+			element_option = #{elementOption},
+			element_format = #{elementFormat},
+			is_show = #{isShow},
+		</set>
+		where id = #{id}
+	</update>
+	
+	<update id="updateNotNull" parameterMap="parameterMap">
+		update pd_form_template_attributes
+		<set>
+			<if test="templateId != null">
+			template_id = #{templateId},
+			</if>
+			<if test="attributesName != null">
+			attributes_name = #{attributesName},
+			</if>
+			<if test="elementAttribute != null">
+			element_attribute = #{elementAttribute},
+			</if>
+			<if test="elementType != null">
+			element_type = #{elementType},
+			</if>
+			<if test="elementOrder != null">
+			element_order = #{elementOrder},
+			</if>
+			<if test="describe != null">
+			describe = #{describe},
+			</if>
+			<if test="isNull != null">
+			is_null = #{isNull},
+			</if>
+			<if test="elementOption != null">
+			element_option = #{elementOption},
+			</if>
+			<if test="elementFormat != null">
+			element_format = #{elementFormat},
+			</if>
+			<if test="isShow != null">
+			is_show = #{isShow},
+			</if>
+		</set>
+		where id = #{id}
+	</update>
+	
+	<delete id="delete" parameterType="java.lang.String">
+		delete from pd_form_template_attributes where id = #{value}
+	</delete>
+	
+	<delete id="batchDelete" parameterType="java.util.List">
+		delete from pd_form_template_attributes where id in
+		<foreach collection="list" item="item" open="(" close=")" separator=",">
+			#{item}
+		</foreach>
+	</delete>
+	
+</mapper>
