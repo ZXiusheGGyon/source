@@ -6,7 +6,7 @@
 	<resultMap id="resultMap" type="com.idp.web.ware.entity.PdGoodsLogistics">
 		<result property="id" column="id"/>
 		<result property="userId" column="user_id"/>
-		<result property="level" column="level"/>
+		<result property="nodeLevel" column="node_level"/>
 		<result property="otherMsg" column="other_msg"/>
 		<result property="goodsId" column="goods_id"/>
 		<result property="createDate" column="create_date"/>
@@ -16,7 +16,7 @@
 		<trim suffixOverrides=",">
 			t.id,
 			t.user_id,
-			t.level,
+			t.node_level,
 			t.other_msg,
 			t.goods_id,
 			t.create_date,
@@ -43,7 +43,7 @@
 		<trim prefix="(" suffix=")" suffixOverrides=",">
 			id,
 			user_id,
-			level,
+			node_level,
 			other_msg,
 			goods_id,
 			create_date,
@@ -51,7 +51,7 @@
 		<trim prefix="values (" suffix=")" suffixOverrides=",">
 			#{id},
 			#{userId},
-			#{level},
+			#{nodeLevel},
 			#{otherMsg},
 			#{goodsId},
 			#{createDate},
@@ -63,7 +63,7 @@
 		<trim prefix="(" suffix=")" suffixOverrides=",">
 			id,
 			user_id,
-			level,
+			node_level,
 			other_msg,
 			goods_id,
 			create_date,
@@ -73,7 +73,7 @@
 			<trim prefix="(" suffix=")" suffixOverrides=",">
 				#{item.id},
 				#{item.userId},
-				#{item.level},
+				#{item.nodeLevel},
 				#{item.otherMsg},
 				#{item.goodsId},
 				#{item.createDate},
@@ -85,7 +85,7 @@
 		update pd_goods_logistics
 		<set>
 			user_id = #{userId},
-			level = #{level},
+			node_level = #{nodeLevel},
 			other_msg = #{otherMsg},
 			goods_id = #{goodsId},
 			create_date = #{createDate},
@@ -99,8 +99,8 @@
 			<if test="userId != null">
 			user_id = #{userId},
 			</if>
-			<if test="level != null">
-			level = #{level},
+			<if test="nodeLevel != null">
+			node_level = #{nodeLevel},
 			</if>
 			<if test="otherMsg != null">
 			other_msg = #{otherMsg},

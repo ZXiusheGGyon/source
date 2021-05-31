@@ -18,7 +18,7 @@
 			<tr>
 				<td>${vs.count + page.offset}</td>
 					<td>${pdGoodsLogistics.userId}</td>
-					<td>${pdGoodsLogistics.level}</td>
+					<td>${pdGoodsLogistics.nodeLevel}</td>
 					<td>${pdGoodsLogistics.otherMsg}</td>
 					<td>${pdGoodsLogistics.goodsId}</td>
 					<td><fmt:formatDate value="${pdGoodsLogistics.createDate}" pattern="yyyy-MM-dd"/></td>

@@ -39,7 +39,7 @@ public class PdGoodsLogistics extends BaseEntity implements Serializable {
 	/**userId*/
 	private String userId;
 	/**层级*/
-	private Integer level;
+	private Integer nodeLevel;
 	/**节点其他信息*/
 	private String otherMsg;
 	/**商品信息*/
@@ -84,16 +84,16 @@ public class PdGoodsLogistics extends BaseEntity implements Serializable {
 	 *方法: 取得Integer
 	 *@return: Integer  层级
 	 */
-	public Integer getLevel(){
-		return this.level;
+	public Integer getNodeLevel(){
+		return this.nodeLevel;
 	}
 
 	/**
 	 *方法: 设置Integer
 	 *@param: Integer  层级
 	 */
-	public void setLevel(Integer level){
-		this.level = level;
+	public void setNodeLevel(Integer nodeLevel){
+		this.nodeLevel = nodeLevel;
 	}
 	
 	/**

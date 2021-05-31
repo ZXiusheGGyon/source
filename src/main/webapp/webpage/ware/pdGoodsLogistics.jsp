@@ -17,7 +17,7 @@
   		<div class="form-group">
         <label class="col-md-3 control-label">层级:</label>
         <div class="col-md-4">
-	          <input type="text" name="level" class="form-control" value="${pdGoodsLogistics.level}"  maxlength="10"/>
+	          <input type="text" name="nodeLevel" class="form-control" value="${pdGoodsLogistics.nodeLevel}"  maxlength="10"/>
         </div>
       </div>
   		<div class="form-group">
