@@ -1,6 +1,9 @@
 package com.idp.web.ware.dao;
 import com.idp.web.ware.entity.PdFormTemplateAttributes;
 import com.idp.common.base.BaseDao;
+import org.springframework.stereotype.Repository;
+
+import java.util.List;
 
 /**
  * 
@@ -27,7 +30,15 @@ import com.idp.common.base.BaseDao;
  * <p/> $Id$
  *
  */
+@Repository
 public interface PdFormTemplateAttributesDao extends BaseDao<PdFormTemplateAttributes, String> {
 
+
+    /**
+     * 批量加入数据
+     * @param list
+     * @return
+     */
+    int addBatchAttr(List<PdFormTemplateAttributes> list);
 
 }

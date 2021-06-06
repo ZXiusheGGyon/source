@@ -47,7 +47,7 @@ public class PdFormTemplateAttributes extends BaseEntity implements Serializable
 	/**元素排序*/
 	private Integer elementOrder;
 	/**描述*/
-	private String describe;
+	private String elementDescribe;
 	/**是否为空*/
 	private String isNull;
 	/**元素选项内容*/
@@ -158,16 +158,16 @@ public class PdFormTemplateAttributes extends BaseEntity implements Serializable
 	 *方法: 取得String
 	 *@return: String  描述
 	 */
-	public String getDescribe(){
-		return this.describe;
+	public String getElementDescribe(){
+		return this.elementDescribe;
 	}
 
 	/**
 	 *方法: 设置String
 	 *@param: String  描述
 	 */
-	public void setDescribe(String describe){
-		this.describe = describe;
+	public void setElementDescribe(String elementDescribe){
+		this.elementDescribe = elementDescribe;
 	}
 	
 	/**

@@ -88,17 +88,19 @@
 	<mvc:resources mapping="/static/**" location="/static/" cache-period="31536000"/>
 
 	<!-- 拦截器 -->
-	<mvc:interceptors> 
+	<!--<mvc:interceptors>
 		<mvc:interceptor> 
 			<mvc:mapping path="/**" /> 
 			<bean class="com.idp.common.interceptor.AuthInterceptor">
 				<property name="excludeUrls"> 
 					<list> 
-						<value>login/checkUser</value>
+					&lt;!&ndash;	<value>login/checkUser</value>
 						<value>login/appLogin</value>
+						&ndash;&gt;
+						<value>*/*</value>
 					</list>
 				</property> 
 			</bean>
 		</mvc:interceptor> 
-	</mvc:interceptors>
+	</mvc:interceptors>-->
 </beans>

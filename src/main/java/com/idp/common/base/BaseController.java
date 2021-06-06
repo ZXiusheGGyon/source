@@ -6,6 +6,7 @@ import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
+import org.json.JSONObject;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.ServletRequestDataBinder;
 import org.springframework.web.bind.annotation.InitBinder;
@@ -64,5 +65,32 @@ public class BaseController {
 		SysUser user = (SysUser)session.getAttribute(SessionAttr.USER_LOGIN.getValue());
 		
 		return user;
+	}
+
+
+	/**
+	 * 请求结果响应
+	 * @param state
+	 * @param data
+	 * @param message
+	 * @return
+	 */
+	public String success(String state,Object data,String message){
+		return result(state,data,message);
+	}
+
+	/**
+	 * 返回结果封装
+	 * @param state
+	 * @param data
+	 * @param message
+	 * @return
+	 */
+	public String result(String state,Object data,String message){
+		JSONObject json= new JSONObject();
+		json.put("state",state);
+		json.put("data",data);
+		json.put("message",message);
+		return json.toString();
 	}
 }

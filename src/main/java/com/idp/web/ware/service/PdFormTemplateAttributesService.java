@@ -100,4 +100,14 @@ public interface PdFormTemplateAttributesService{
 	 * @param id
 	 */
 	public void delete(String id);
+
+
+	/**
+	 * 批量加入数据
+	 * @param jsonList
+	 * @return
+	 */
+	boolean addBatchAttr(String jsonList);
+
+
 }

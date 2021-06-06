@@ -93,7 +93,6 @@ public class ResourceUtils {
 	 * @return
 	 */
 	public static String getUUID(){
-		
 		return UUID.randomUUID().toString().replaceAll("-", "");
 	}
 }

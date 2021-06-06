@@ -1,4 +1,5 @@
 package com.idp.web.ware.controller;
+import com.idp.common.response.ResponseCode;
 import com.idp.web.ware.entity.PdFormTemplateAttributes;
 import com.idp.web.ware.service.PdFormTemplateAttributesService;
 import javax.annotation.Resource;
@@ -7,6 +8,8 @@ import javax.servlet.http.HttpServletRequest;
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.idp.common.base.BaseController;
@@ -14,7 +17,6 @@ import com.idp.common.persistence.Page;
 import com.idp.common.util.ValidateUtils;
 
 import net.sf.json.JSONObject;
-
 /**
  * 
  * 模板属性controller
@@ -185,4 +187,20 @@ public class PdFormTemplateAttributesController extends BaseController {
 		
 		return json.toString();
 	}
+	/**
+	 * 模板属性新增接口
+	 * @param jsonList
+	 * @return
+	 */
+	@RequestMapping(value = "/addBatchAttr",method = RequestMethod.POST)
+	@ResponseBody
+	public String addBatchAttr(@RequestParam("jsonList") String jsonList){
+
+		if(pdFormTemplateAttributesService.addBatchAttr(jsonList))
+			return success(ResponseCode.SUCCESS,null,"添加成功");
+		else
+			return success(ResponseCode.ERROR,null,"添加失败");
+
+	}
+
 }

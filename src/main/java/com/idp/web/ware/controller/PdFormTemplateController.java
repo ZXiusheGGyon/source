@@ -1,19 +1,23 @@
 package com.idp.web.ware.controller;
+import com.alibaba.fastjson.JSONArray;
 import com.idp.web.ware.entity.PdFormTemplate;
+import com.idp.web.ware.entity.PdFormTemplateAttributes;
 import com.idp.web.ware.service.PdFormTemplateService;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
-
 import org.apache.log4j.Logger;
+import org.json.JSONObject;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-
 import com.idp.common.base.BaseController;
 import com.idp.common.persistence.Page;
 import com.idp.common.util.ValidateUtils;
+import java.util.List;
 
-import net.sf.json.JSONObject;
+import static cn.jiguang.common.connection.Http2Client.JSON;
+
 
 /**
  * 
@@ -132,9 +136,7 @@ public class PdFormTemplateController extends BaseController {
 	@RequestMapping("/save")
 	@ResponseBody
 	public String save(PdFormTemplate pdFormTemplate){
-		
 		JSONObject json = new JSONObject();
-		
 		try {
 			
 			// 修改
@@ -185,4 +187,12 @@ public class PdFormTemplateController extends BaseController {
 		
 		return json.toString();
 	}
+
+
+
+
+
+
+
+
 }
