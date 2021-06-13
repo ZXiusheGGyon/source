@@ -80,5 +80,9 @@ public class PdGoodsServiceImpl implements PdGoodsService {
 
 		pdGoodsDao.delete(goodsId);
 	}
- 	
+
+	@Override
+	public List<PdGoods> selectGoodsByUserId(String userId) {
+		return pdGoodsDao.selectGoodsByUserId(userId);
+	}
 }

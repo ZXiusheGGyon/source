@@ -1,6 +1,6 @@
 <component name="ArtifactManager">
   <artifact type="exploded-war" name="jeeidp:war exploded">
-    <output-path>$PROJECT_DIR$/target/jeeidp</output-path>
+    <output-path>$PROJECT_DIR$/target/source</output-path>
     <root id="root">
       <element id="directory" name="WEB-INF">
         <element id="directory" name="classes">
@@ -65,10 +65,16 @@
           <element id="library" level="project" name="Maven: com.squareup.okio:okio:1.8.0" />
           <element id="library" level="project" name="Maven: io.netty:netty-all:4.1.6.Final" />
           <element id="library" level="project" name="Maven: com.google.code.gson:gson:2.3" />
+          <element id="library" level="project" name="Maven: org.json:json:20171018" />
+          <element id="library" level="project" name="Maven: com.alibaba:fastjson:1.2.41" />
+          <element id="library" level="project" name="Maven: net.sf.barcode4j:barcode4j-light:2.0" />
+          <element id="library" level="project" name="Maven: xml-apis:xml-apis:1.3.04" />
+          <element id="library" level="project" name="Maven: org.apache.poi:poi:3.9" />
+          <element id="library" level="project" name="Maven: net.sourceforge.jexcelapi:jxl:2.6.12" />
         </element>
       </element>
       <element id="directory" name="META-INF">
-        <element id="file-copy" path="$PROJECT_DIR$/target/jeeidp/META-INF/MANIFEST.MF" />
+        <element id="file-copy" path="$PROJECT_DIR$/target/source/META-INF/MANIFEST.MF" />
       </element>
       <element id="javaee-facet-resources" facet="jeeidp/web/Web" />
     </root>

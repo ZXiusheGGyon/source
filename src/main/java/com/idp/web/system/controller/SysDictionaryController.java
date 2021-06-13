@@ -4,6 +4,7 @@ import com.idp.web.system.service.SysDictionaryService;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 
+import net.sf.json.JSONArray;
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -14,6 +15,8 @@ import com.idp.common.persistence.Page;
 import com.idp.common.util.ValidateUtils;
 
 import net.sf.json.JSONObject;
+
+import java.util.List;
 
 /**
  * 
@@ -187,5 +190,18 @@ public class SysDictionaryController extends BaseController {
 		}
 		
 		return json.toString();
+	}
+
+	/**
+	 * 查询字典
+	 * @param groupId 字典数据
+	 * @return
+	 */
+	@RequestMapping(value = "/getByGroupId", produces = "application/json;charset=utf-8")
+	@ResponseBody
+	public String getByGroupId(String groupId){
+		List<SysDictionary> sysDictionaries = sysDictionaryService.getByGroupId(groupId);
+		JSONArray array = JSONArray.fromObject(sysDictionaries);
+		return array.toString();
 	}
 }

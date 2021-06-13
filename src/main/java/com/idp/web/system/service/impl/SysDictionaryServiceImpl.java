@@ -118,4 +118,19 @@ public class SysDictionaryServiceImpl implements SysDictionaryService {
 		
 		return sysDictionary;
 	}
+	
+	@Override
+	public List<SysDictionary> getByGroupId(String groupId) {
+		return sysDictionaryDao.getByGroupId(groupId);
+	}
+
+	@Override
+	public void deleteByGroupId(String groupId) {
+		sysDictionaryDao.deleteByGroupId(groupId);
+	}
+
+	@Override
+	public SysDictionary getByGroupCode(String code) {
+		return sysDictionaryDao.getByGroupCode(code);
+	}
 }

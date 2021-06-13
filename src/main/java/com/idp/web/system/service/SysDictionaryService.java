@@ -103,4 +103,27 @@ public interface SysDictionaryService{
 	
 	
 	public SysDictionary getByCode(String code);
+
+	/**
+	 * 根据分组id获取信息
+	 *
+	 * @param groupId
+	 * @return
+	 */
+	public List<SysDictionary> getByGroupId(String groupId);
+
+	/**
+	 * 根据分组id删除信息
+	 *
+	 * @param groupId
+	 */
+	public void deleteByGroupId(String groupId);
+
+	/**
+	 * 根据分组code获取信息
+	 *
+	 * @param code
+	 * @return
+	 */
+	public SysDictionary getByGroupCode(String code);
 }

@@ -2,6 +2,8 @@ package com.idp.web.ware.dao;
 import com.idp.web.ware.entity.PdGoods;
 import com.idp.common.base.BaseDao;
 
+import java.util.List;
+
 /**
  * 
  * 商品dao接口.
@@ -28,6 +30,6 @@ import com.idp.common.base.BaseDao;
  *
  */
 public interface PdGoodsDao extends BaseDao<PdGoods, String> {
-
+    public List<PdGoods> selectGoodsByUserId(String userId);
 
 }

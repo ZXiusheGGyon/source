@@ -10,7 +10,7 @@ import com.idp.common.persistence.Page;
  * 
  * <pre>
  * 	历史记录：
- * 	2017-12-07 HS
+ * 	2017-12-14 HS
  * 	新建文件
  * </pre>
  * 
@@ -34,7 +34,7 @@ public interface PdGoodsLogisticsService{
  	/**
 	 * 
 	 * <pre>
-	 * 	2017-12-07 HS
+	 * 	2017-12-14 HS
 	 * 	分页查询
 	 * </pre>
 	 * 
@@ -47,7 +47,7 @@ public interface PdGoodsLogisticsService{
 	/**
 	 * 
 	 * <pre>
-	 * 	2017-12-07 HS
+	 * 	2017-12-14 HS
 	 * 	查询
 	 * </pre>
 	 * 
@@ -59,7 +59,7 @@ public interface PdGoodsLogisticsService{
 	/**
 	 * 
 	 * <pre>
-	 * 	2017-12-07 HS
+	 * 	2017-12-14 HS
 	 * 	通过ID查询
 	 * </pre>
 	 * 
@@ -71,7 +71,7 @@ public interface PdGoodsLogisticsService{
 	/**
 	 * 
 	 * <pre>
-	 * 	2017-12-07 HS
+	 * 	2017-12-14 HS
 	 * 	新增
 	 * </pre>
 	 * 
@@ -82,7 +82,7 @@ public interface PdGoodsLogisticsService{
 	/**
 	 * 
 	 * <pre>
-	 * 	2017-12-07 HS
+	 * 	2017-12-14 HS
 	 * 	修改
 	 * </pre>
 	 * 
@@ -93,7 +93,7 @@ public interface PdGoodsLogisticsService{
 	/**
 	 * 
 	 * <pre>
-	 * 	2017-12-07 HS
+	 * 	2017-12-14 HS
 	 * 	删除
 	 * </pre>
 	 * 

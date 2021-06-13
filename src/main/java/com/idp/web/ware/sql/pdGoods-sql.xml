@@ -108,5 +108,12 @@
 			#{item}
 		</foreach>
 	</delete>
-	
+
+
+	<select id="selectGoodsByUserId" parameterType="java.lang.String" resultMap="resultMap">
+		select
+		<include refid="columnSql"></include>
+		from pd_goods t
+		where t.user_id = #{userId}
+	</select>
 </mapper>

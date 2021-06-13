@@ -1,8 +1,15 @@
 package com.idp.web.ware.controller;
+import com.idp.common.constant.SessionAttr;
+import com.idp.common.model.UploadModel;
+import com.idp.common.util.UploadUtils;
+import com.idp.web.system.entity.SysUser;
+import com.idp.web.ware.dao.PdGoodsDao;
+import com.idp.web.ware.entity.PdGoods;
 import com.idp.web.ware.entity.PdGoodsLogistics;
 import com.idp.web.ware.service.PdGoodsLogisticsService;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Controller;
@@ -15,13 +22,15 @@ import com.idp.common.util.ValidateUtils;
 
 import net.sf.json.JSONObject;
 
+import java.util.List;
+
 /**
  * 
  * 商品流转信息controller
  * 
  * <pre>
  * 	历史记录：
- * 	2017-12-07 HS
+ * 	2017-12-14 HS
  * 	新建文件
  * </pre>
  * 
@@ -48,11 +57,14 @@ public class PdGoodsLogisticsController extends BaseController {
 
 	@Resource
 	private PdGoodsLogisticsService pdGoodsLogisticsService;
+
+	@Resource
+	private PdGoodsDao pdGoodsDao;
 	
 	/**
 	 * 
 	 * <pre>
-	 * 	2017-12-07 HS
+	 * 	2017-12-14 HS
 	 * 	初始化查询页面
 	 * </pre>
 	 * 
@@ -61,13 +73,13 @@ public class PdGoodsLogisticsController extends BaseController {
 	@RequestMapping("/init")
 	public String init(){
 		
-		return "ware/pdGoodsLogisticsSearch";
+		return "ware/goods_logistics/pdGoodsLogisticsSearch";
 	}
 	
 	/**
 	 * 
 	 * <pre>
-	 * 	2017-12-07 HS
+	 * 	2017-12-14 HS
 	 * 	分页查询
 	 * </pre>
 	 * 
@@ -87,13 +99,13 @@ public class PdGoodsLogisticsController extends BaseController {
 			logger.error(e.getMessage(), e);
 		}
 		
-		return "ware/pdGoodsLogisticsList";
+		return "ware/goods_logistics/pdGoodsLogisticsList";
 	}
 
 	/**
 	 * 
 	 * <pre>
-	 * 	2017-12-07 HS
+	 * 	2017-12-14 HS
 	 * 	新增修改页面初始化
 	 * </pre>
 	 * 
@@ -116,27 +128,37 @@ public class PdGoodsLogisticsController extends BaseController {
 			logger.error(e.getMessage(), e);
 		}
 		
-		return "ware/pdGoodsLogistics";
+		return "ware/goods_logistics/pdGoodsLogistics";
 	}
 	
 	/**
 	 * 
 	 * <pre>
-	 * 	2017-12-07 HS
+	 * 	2017-12-14 HS
 	 * 	保存
 	 * </pre>
 	 * 
-	 * @param pdGoodsLogistics
+	 * @param request
 	 * @return
 	 */
 	@RequestMapping("/save")
 	@ResponseBody
-	public String save(PdGoodsLogistics pdGoodsLogistics){
-		
+	public String save(HttpServletRequest request){
+		PdGoodsLogistics pdGoodsLogistics = new PdGoodsLogistics();
 		JSONObject json = new JSONObject();
 		
 		try {
-			
+			HttpSession session = request.getSession();
+			SysUser sysUser = (SysUser) session.getAttribute(SessionAttr.USER_LOGIN.getValue());
+			pdGoodsLogistics.setUserId(sysUser.getId());
+
+			List<PdGoods> pdGoodses = pdGoodsDao.selectGoodsByUserId(sysUser.getId());
+			request.setAttribute("pdGoodses", pdGoodses);
+
+			UploadModel model = new UploadModel(UploadUtils.getServerUploadBasePath(UploadUtils.PATH_IMAGES),
+					UploadModel.IMAGES, pdGoodsLogistics);
+			UploadUtils.uploadFileSealedObject(request, model);
+
 			// 修改
 			if(ValidateUtils.isNotEmpty(pdGoodsLogistics.getId())){
 				
@@ -160,7 +182,7 @@ public class PdGoodsLogisticsController extends BaseController {
 	/**
 	 * 
 	 * <pre>
-	 * 	2017-12-07 HS
+	 * 	2017-12-14 HS
 	 * 	删除
 	 * </pre>
 	 * 
@@ -184,5 +206,20 @@ public class PdGoodsLogisticsController extends BaseController {
 		}
 		
 		return json.toString();
+	}
+
+	/**
+	 * author hs
+	 * @param request
+	 * @return 跳转页面
+	 */
+	@RequestMapping("/addPdGoodsLogisticsView")
+	public String addPdGoodsLogisticsView(HttpServletRequest request){
+		HttpSession session = request.getSession();
+		SysUser sysUser = (SysUser) session.getAttribute(SessionAttr.USER_LOGIN.getValue());
+		List<PdGoods> pdGoodses = pdGoodsDao.selectGoodsByUserId(sysUser.getId());
+		request.setAttribute("pdGoodses", pdGoodses);
+
+		return "ware/goods_logistics/pdGoodsLogistics";
 	}
 }

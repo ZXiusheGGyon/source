@@ -234,7 +234,7 @@ function del(url){
 			url: webRoot+url,
 			dataType: 'json',
 			success: function(data){
-				alert(messages[data.result]);
+				// alert(messages[data.result]);
 				search();
 			}
 		});

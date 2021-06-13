@@ -10,6 +10,12 @@
 		<result property="otherMsg" column="other_msg"/>
 		<result property="goodsId" column="goods_id"/>
 		<result property="createDate" column="create_date"/>
+		<result property="goodsCode" column="goods_code"/>
+		<result property="orderNumber" column="order_number"/>
+		<result property="orderType" column="order_type"/>
+		<result property="companyInformationId" column="company_information_id"/>
+		<result property="head" column="head"/>
+		<result property="goodsCodesPath" column="goods_codes_path"/>
 	</resultMap>
 	
 	<sql id="columnSql">
@@ -20,6 +26,12 @@
 			t.other_msg,
 			t.goods_id,
 			t.create_date,
+			t.goods_code,
+			t.order_number,
+			t.order_type,
+			t.company_information_id,
+			t.head,
+			t.goods_codes_path,
 	 	</trim>
 	</sql>
 	
@@ -28,6 +40,12 @@
 			<include refid="columnSql"></include>
 		from pd_goods_logistics t
 		<where>
+			<if test="goodsId != null and goodsId != ''">
+				and t.goods_id like concat('%',#{goodsId},'%')
+			</if>
+			<if test="goodsCode != null and goodsCode != ''">
+				and t.goods_code like concat('%',#{goodsCode},'%')
+			</if>
 		</where>
 	</select>
 	
@@ -47,6 +65,12 @@
 			other_msg,
 			goods_id,
 			create_date,
+			goods_code,
+			order_number,
+			order_type,
+			company_information_id,
+			head,
+			goods_codes_path,
 		</trim>
 		<trim prefix="values (" suffix=")" suffixOverrides=",">
 			#{id},
@@ -55,6 +79,12 @@
 			#{otherMsg},
 			#{goodsId},
 			#{createDate},
+			#{goodsCode},
+			#{orderNumber},
+			#{orderType},
+			#{companyInformationId},
+			#{head},
+			#{goodsCodesPath},
 		</trim>
 	</insert>
 	
@@ -67,6 +97,12 @@
 			other_msg,
 			goods_id,
 			create_date,
+			goods_code,
+			order_number,
+			order_type,
+			company_information_id,
+			head,
+			goods_codes_path,
 		</trim>
 		values
 		<foreach collection="list" item="item" separator=",">
@@ -77,6 +113,12 @@
 				#{item.otherMsg},
 				#{item.goodsId},
 				#{item.createDate},
+				#{item.goodsCode},
+				#{item.orderNumber},
+				#{item.orderType},
+				#{item.companyInformationId},
+				#{item.head},
+				#{item.goodsCodesPath},
 			</trim>
 		</foreach>
 	</insert>
@@ -89,6 +131,12 @@
 			other_msg = #{otherMsg},
 			goods_id = #{goodsId},
 			create_date = #{createDate},
+			goods_code = #{goodsCode},
+			order_number = #{orderNumber},
+			order_type = #{orderType},
+			company_information_id = #{companyInformationId},
+			head = #{head},
+			goods_codes_path = #{goodsCodesPath},
 		</set>
 		where id = #{id}
 	</update>
@@ -110,6 +158,24 @@
 			</if>
 			<if test="createDate != null">
 			create_date = #{createDate},
+			</if>
+			<if test="goodsCode != null">
+			goods_code = #{goodsCode},
+			</if>
+			<if test="orderNumber != null">
+			order_number = #{orderNumber},
+			</if>
+			<if test="orderType != null">
+			order_type = #{orderType},
+			</if>
+			<if test="companyInformationId != null">
+			company_information_id = #{companyInformationId},
+			</if>
+			<if test="head != null">
+			head = #{head},
+			</if>
+			<if test="goodsCodesPath != null">
+			goods_codes_path = #{goodsCodesPath},
 			</if>
 		</set>
 		where id = #{id}

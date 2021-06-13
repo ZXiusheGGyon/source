@@ -100,4 +100,11 @@ public interface PdGoodsService{
 	 * @param goodsId
 	 */
 	public void delete(String goodsId);
+
+	/**
+	 * author hs
+	 * @param userId
+	 * @return
+	 */
+	public List<PdGoods> selectGoodsByUserId(String userId);
 }
